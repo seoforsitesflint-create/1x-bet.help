@@ -110,25 +110,60 @@
             box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
         }
 
-        /* Hero Section - UPDATED */
+        /* Hero Section - BACKGROUND IMAGE */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             padding-top: 80px;
             padding-bottom: 60px;
-            background: linear-gradient(135deg, var(--background-color) 0%, var(--surface-color) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Затемнение поверх картинки для читаемости текста */
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(15, 15, 35, 0.92) 0%,
+                rgba(15, 15, 35, 0.75) 50%,
+                rgba(15, 15, 35, 0.5) 100%
+            );
         }
 
         .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1.3fr; /* Увеличена пропорция для картинки */
-            gap: 3rem;
-            align-items: center;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            max-width: 650px;
         }
 
         .hero-text h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
             background: var(--gradient-primary);
@@ -139,17 +174,18 @@
         }
 
         .hero-text p {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--text-secondary);
             margin-bottom: 2rem;
-            line-height: 1.6;
+            line-height: 1.7;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .hero-cta {
             background: transparent;
             border: 2px solid var(--primary-color);
             color: var(--primary-color);
-            padding: 1rem 2rem;
+            padding: 1rem 2.5rem;
             border-radius: 50px;
             font-size: 1.1rem;
             font-weight: 600;
@@ -164,26 +200,6 @@
             color: white;
             box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
             transform: translateY(-2px);
-        }
-
-        .hero-image {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero-image img {
-            width: 100%;
-            max-width: 650px; /* Увеличен максимальный размер */
-            height: auto;
-            border-radius: 20px;
-            box-shadow: var(--shadow-primary);
-            transition: transform 0.3s ease;
-        }
-
-        .hero-image img:hover {
-            transform: scale(1.02);
         }
 
         /* Sections */
@@ -392,37 +408,27 @@
             margin-bottom: 1rem;
         }
 
-        /* RESPONSIVE DESIGN - UPDATED */
+        /* RESPONSIVE DESIGN */
         
         /* Большие экраны */
         @media (min-width: 1400px) {
-            .hero-content {
-                grid-template-columns: 1fr 1.5fr;
-                gap: 4rem;
-            }
-            
-            .hero-image img {
-                max-width: 750px;
-            }
-            
             .hero-text h1 {
-                font-size: 3.5rem;
+                font-size: 4rem;
+            }
+            
+            .hero-content {
+                max-width: 750px;
             }
         }
         
         /* Планшеты */
         @media (max-width: 1024px) {
-            .hero-content {
-                grid-template-columns: 1fr 1fr;
-                gap: 2rem;
-            }
-            
             .hero-text h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
             
-            .hero-image img {
-                max-width: 100%;
+            .hero-content {
+                max-width: 550px;
             }
         }
 
@@ -446,37 +452,30 @@
             .hero {
                 padding-top: 120px;
                 padding-bottom: 40px;
+                min-height: auto;
+            }
+
+            .hero-bg::after {
+                background: linear-gradient(
+                    180deg,
+                    rgba(15, 15, 35, 0.95) 0%,
+                    rgba(15, 15, 35, 0.85) 50%,
+                    rgba(15, 15, 35, 0.75) 100%
+                );
             }
 
             .hero-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+                max-width: 100%;
+                align-items: center;
                 text-align: center;
             }
 
-            /* Картинка сверху на мобилке */
-            .hero-content {
-                display: flex;
-                flex-direction: column-reverse;
-            }
-
             .hero-text h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             .hero-text p {
                 font-size: 1rem;
-            }
-
-            .hero-image {
-                width: 100%;
-                margin-bottom: 1rem;
-            }
-
-            .hero-image img {
-                width: 100%;
-                max-width: 100%;
-                border-radius: 15px;
             }
 
             .section h2 {
@@ -509,7 +508,7 @@
             }
 
             .hero-text h1 {
-                font-size: 1.75rem;
+                font-size: 1.9rem;
             }
 
             .hero-text p {
@@ -558,15 +557,15 @@
     </header>
 
     <section class="hero">
+        <div class="hero-bg">
+            <img src="img/1x-bet-help-h2-3-registratsiya-na-ofitsial-nom-sayte-1xbet.jpg" alt="1xBet официальный сайт" width="1440" height="449">
+        </div>
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
                     <h1>1xBet официальный сайт — вход, регистрация, бонус</h1>
                     <p>1xBet — это международная букмекерская платформа, которая объединяет ставки на спорт, казино и дополнительные игровые сервисы. Большинство пользователей начинают работу именно через <strong>1xbet официальный сайт</strong>, где доступны основные функции: <strong>1xbet регистрация</strong>, <strong>1xbet вход</strong> в личный кабинет и управление аккаунтом.</p>
                     <button class="hero-cta" data-ref="aHR0cHM6Ly9vbmV4YmV0c2xvdG8ueHl6L3FGbTNncT9zb3VyY2U9MXgtYmV0LmhlbHA=">Играть сейчас</button>
-                </div>
-                <div class="hero-image">
-                    <img src="img/1x-bet-help-h2-3-registratsiya-na-ofitsial-nom-sayte-1xbet.jpg" alt="1xBet официальный сайт" width="1440" height="449">
                 </div>
             </div>
         </div>
