@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ru" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -110,24 +110,25 @@
             box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
         }
 
-        /* Hero Section */
+        /* Hero Section - UPDATED */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             padding-top: 80px;
+            padding-bottom: 60px;
             background: linear-gradient(135deg, var(--background-color) 0%, var(--surface-color) 100%);
         }
 
         .hero-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: 1fr 1.3fr; /* Увеличена пропорция для картинки */
+            gap: 3rem;
             align-items: center;
         }
 
         .hero-text h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
             background: var(--gradient-primary);
@@ -138,7 +139,7 @@
         }
 
         .hero-text p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
             margin-bottom: 2rem;
             line-height: 1.6;
@@ -167,13 +168,22 @@
 
         .hero-image {
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .hero-image img {
             width: 100%;
+            max-width: 650px; /* Увеличен максимальный размер */
             height: auto;
             border-radius: 20px;
             box-shadow: var(--shadow-primary);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.02);
         }
 
         /* Sections */
@@ -382,7 +392,41 @@
             margin-bottom: 1rem;
         }
 
-        /* Responsive Design */
+        /* RESPONSIVE DESIGN - UPDATED */
+        
+        /* Большие экраны */
+        @media (min-width: 1400px) {
+            .hero-content {
+                grid-template-columns: 1fr 1.5fr;
+                gap: 4rem;
+            }
+            
+            .hero-image img {
+                max-width: 750px;
+            }
+            
+            .hero-text h1 {
+                font-size: 3.5rem;
+            }
+        }
+        
+        /* Планшеты */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-image img {
+                max-width: 100%;
+            }
+        }
+
+        /* Мобильные устройства */
         @media (max-width: 768px) {
             .container {
                 padding: 0 15px;
@@ -399,14 +443,40 @@
                 justify-content: center;
             }
 
+            .hero {
+                padding-top: 120px;
+                padding-bottom: 40px;
+            }
+
             .hero-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
                 text-align: center;
             }
 
+            /* Картинка сверху на мобилке */
+            .hero-content {
+                display: flex;
+                flex-direction: column-reverse;
+            }
+
             .hero-text h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+            }
+
+            .hero-image {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            .hero-image img {
+                width: 100%;
+                max-width: 100%;
+                border-radius: 15px;
             }
 
             .section h2 {
@@ -434,16 +504,25 @@
         }
 
         @media (max-width: 480px) {
+            .hero {
+                padding-top: 130px;
+            }
+
             .hero-text h1 {
-                font-size: 2rem;
+                font-size: 1.75rem;
             }
 
             .hero-text p {
+                font-size: 0.95rem;
+            }
+
+            .hero-cta {
+                padding: 0.875rem 1.5rem;
                 font-size: 1rem;
             }
 
             .section h2 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
 
             .section-content {
@@ -1047,9 +1126,6 @@
         });
     </script>
 
-
-
-
 <!-- Consent Popup -->
 <div class="consent-popup" id="consent-popup">
   <div class="consent-content">
@@ -1067,7 +1143,6 @@
 .consent-accept:hover{filter:brightness(1.1);transform:scale(1.02)}
 @media(max-width:640px){.consent-content{flex-direction:column;text-align:center}.consent-accept{width:100%}}
 </style>
-
 
 <script>
 (function(){
